@@ -14,8 +14,8 @@ body {
   font-weight: 300;
 
   text-rendering: optimizeLegibility;
-  font-size: 22px
-
+  font-size: 22px;
+	background-color:black;
 }
 
 main {
@@ -23,31 +23,35 @@ main {
 	-webkit-flex: 1 0 auto;
 	-ms-flex: 1 0 auto;
 	flex: 1 0 auto;
-	margin-top: 2em;
-
-}
-
-.page {
-	padding: 2em 2em 2em 2em;
 }
 
 .quote {
 	text-align: justify;
-	font-size: 0.8em;
-	margin: 0 1em 0 1em;
+	margin-top: 1em;
+	margin-bottom: 0em;
 }
 
-.question {
-	margin: 1em 0 0 1em;
+#questions {
+}
+
+.question{
 	font-size: 0.8em;
+	margin-top: 4em;
+	margin-bottom: 0em;
 }
 
 .prefix {
 	font-size: 0.2em;
 }
 
+input[type=text] {
+	margin: 0 0 0 0;
+	height:2.5em;
+}
+
 .input-field {
-	margin-top: -0.5em;
+	margin-bottom: 2em;
+	margin-top: 0;
 }
 
 /* label color */
