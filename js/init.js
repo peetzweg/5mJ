@@ -35,7 +35,6 @@ function setSymbol(){
   } else {
     symbolString+= " left fa-sun-o"
   }
-  console.log(symbolString);
 
   $('#symbol').addClass(symbolString);
 }
@@ -45,6 +44,18 @@ function setHeading(){
 }
 
 function addInputs(){
+  var questions = dayQuestions
+  if(nighttime){
+    questions = nightQuestions
+  }
+
+  for(var i=0; i< questions.length; i++){
+    $(".input-field").append('<h6 class="center question">'+questions[i]+'</h6>')
+
+    for(var j=0; j<3; j++){
+      $(".input-field").append('<input placeholder="'+(j+1)+'." type="text">');
+    }
+  }
 }
 
 function init( jQuery ) {
