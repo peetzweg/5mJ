@@ -27,9 +27,21 @@ function setColors(){
   $('body').css( "color", textColor );
 }
 
+function setSymbol(){
+  var symbolString = "fa fa-2x"
+
+  if(nighttime){
+    symbolString+= " right fa-moon-o"
+  } else {
+    symbolString+= " left fa-sun-o"
+  }
+  console.log(symbolString);
+
+  $('#symbol').addClass(symbolString);
+}
+
 function setHeading(){
   $('#heading').text(moment().format('dddd, MMMM Do, YYYY'));
-
 }
 
 function addInputs(){
@@ -39,8 +51,9 @@ function init( jQuery ) {
   if(moment().hour() >= 18){
     nighttime = true
   }
-
+  nighttime = false
   setColors()
+  setSymbol()
   setHeading()
   addInputs()
 
