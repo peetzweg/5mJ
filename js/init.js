@@ -13,21 +13,20 @@ var nightQuestions = ["3 Amazing things that happened today...", "How could I ha
 
 var defaultQuote = '"If you are patient in one moment of anger you will escape one hundred days of sorrow." ~Chinese Proverb'
 
-
-
 function setColors(){
   var bgColor
   var textColor
   if(nighttime){
     bgColor = nightBGColor
     textColor = nightColor
+
   } else {
     bgColor = dayBGColor
     textColor = dayColor
   }
 
-  $('body').css( "background-color", bgColor );
-  $('body').css( "color", textColor );
+  $('body').css("background-color", bgColor);
+  $('body').css("color", textColor);
 }
 
 function setSymbol(){
@@ -56,7 +55,11 @@ function addInputs(){
     $(".input-field").append('<h6 class="center question">'+questions[i]+'</h6>')
 
     for(var j=0; j<3; j++){
-      $(".input-field").append('<input placeholder="'+(j+1)+'." type="text">');
+      var questionNumber = i;
+      if(nighttime){
+        questionNumber+=3;
+      }
+      $(".input-field").append('<input id="'+questionNumber+'.'+j+'" placeholder="'+(j+1)+'." type="text">');
     }
   }
 }
@@ -95,10 +98,20 @@ function setQuote(){
   });
 }
 
+function restoreAnswers(keyPrefix){
+  $('input').each(function( index ) {
+    var finalKey = keyPrefix+"_"+$( this ).attr("id");
+    var answer = localStorage[finalKey]
+    console.log(finalKey+': ' + answer);
+    $( this ).val(answer);
+  });
+}
+
 function init( jQuery ) {
   if(moment().hour() >= 18){
     nighttime = true
   }
+  nighttime = false
 
   setColors()
   setSymbol()
@@ -106,9 +119,14 @@ function init( jQuery ) {
   addInputs()
   setQuote()
 
+  var today = moment().format('YYYY-MM-DD');
+  var key = '5mj_' + today
+
+  restoreAnswers(key);
 
   $(':input').bind('input propertychange', function(){
-    console.log($(this).attr("id") + " = " + $(this).val());
+    var myKey = key+'_'+$(this).attr("id");
+    localStorage.setItem(myKey, $(this).val());
   });
 }
 
